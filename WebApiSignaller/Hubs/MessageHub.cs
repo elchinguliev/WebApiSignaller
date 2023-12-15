@@ -12,6 +12,12 @@ namespace WebApiSignaller.Hubs
             await Clients.Others.SendAsync("ReceiveConnectInfo", "User Connected");
         }
 
+        public async Task DisconnectedUser(string room, string user)
+        {
+   
+            await Clients.OthersInGroup(room).SendAsync("ReceiveDisconnectInfo", user);
+        }
+
         public async Task SendMessage(string message)
         {
             await Clients.Others.SendAsync("ReceiveMessage", message+"'s Offer : ", FileHelper.Read());
